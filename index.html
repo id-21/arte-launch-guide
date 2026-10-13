@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arte Launch Guide</title>
+<style>
+:root{
+  --bg:#f6f3ee; --surface:#ffffff; --ink:#1d1b18; --muted:#6b655d; --line:#e4ded5;
+  --accent:#8a5a3b; --ok:#1f6b3a; --ok-bg:#dff3e4; --warn:#8a5a00; --warn-bg:#fbeac2; --no:#5f5a52; --no-bg:#ebe7e0; --accent-soft:#f0e6dc; --chip:#ebe5db; --shadow:0 1px 2px rgba(40,30,20,.06),0 8px 24px rgba(40,30,20,.06);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#14120f;--surface:#1e1b17;--ink:#f1ece4;--muted:#a69e92;--line:#34302a;--accent:#d9a77e; --ok:#8fdcab; --ok-bg:#1d3a28; --warn:#f0cd7a; --warn-bg:#40330f; --no:#b5ada1; --no-bg:#2d2a25;--accent-soft:#2c241d;--chip:#2a2621;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35)}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.45}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{max-width:1400px;margin:0 auto;padding:10px 16px;display:grid;gap:8px}
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(18px,4.5vw,22px);margin:0;letter-spacing:.01em}
+.count{color:var(--muted);font-size:14px;white-space:nowrap}
+.search{position:relative}
+.search input{width:100%;font:inherit;font-size:18px;padding:12px 44px 12px 46px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);outline:none;-webkit-appearance:none}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--muted)}
+.search button{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:var(--chip);color:var(--ink);width:30px;height:30px;border-radius:50%;font-size:18px;line-height:1;cursor:pointer;display:none}
+.search.has button{display:block}
+.rows{display:grid;gap:8px;margin-bottom:14px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;font:inherit;font-size:14px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;white-space:nowrap}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip.launch{font-weight:600}
+.chips[hidden]{display:none}
+.chip.shop[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.chiplabel{flex:none;align-self:center;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding-right:2px}
+main{max-width:1400px;margin:0 auto;padding:16px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+@media (max-width:560px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;cursor:pointer;border:0;padding:0;text-align:left;font:inherit;color:inherit}
+.card:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.02em;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.b-in{background:var(--ok-bg);color:var(--ok)}.b-ordered{background:var(--warn-bg);color:var(--warn)}.b-not{background:var(--no-bg);color:var(--no)}
+.card .ph{position:relative}.card .ph .badge{position:absolute;left:10px;top:10px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.noimg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.pline{font-size:15px;font-weight:600;margin-top:2px}.pline small{font-weight:400;color:var(--muted);font-size:13px}
+.pline.none{font-weight:500;color:var(--muted)}
+.fact.price{background:var(--accent-soft)}.fact.price span{display:block;font-size:17px;margin-top:2px}.fact.price .big{font-size:24px;font-family:var(--serif);font-weight:600}
+.cws{display:flex;flex-wrap:wrap;gap:6px}.cws span{background:var(--chip);border-radius:999px;padding:4px 10px;font-size:13px}
+.card .ph{aspect-ratio:2/3;background:var(--chip);overflow:hidden}
+.card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.card:hover img{transform:scale(1.03)}
+.card .tx{padding:14px 16px 18px;display:grid;gap:6px}
+.coll{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.name{font-family:var(--serif);font-size:26px;line-height:1.1;margin:0;font-weight:600}
+.desc{font-size:16px;margin:2px 0 0}
+.dim{font-size:13px;color:var(--muted);margin-top:4px;padding-top:8px;border-top:1px solid var(--line)}
+mark{background:#ffe08a;color:#1d1b18;border-radius:3px;padding:0 1px}
+.empty{padding:60px 16px;text-align:center;color:var(--muted);font-size:18px}
+/* detail */
+dialog{border:0;padding:0;background:var(--surface);color:var(--ink);width:min(1100px,100vw);max-width:100vw;height:min(92vh,900px);max-height:100vh;border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+@media (max-width:760px){dialog{width:100vw;height:100dvh;max-height:100dvh;border-radius:0}}
+dialog::backdrop{background:rgba(10,8,5,.6)}
+.dl{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);height:100%}
+@media (max-width:760px){.dl{grid-template-columns:1fr;grid-template-rows:auto 1fr;overflow-y:auto;display:block}}
+.stage{background:#0f0d0b;display:flex;flex-direction:column;min-height:0}
+.main{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:0}
+.main img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+@media (max-width:760px){.main{height:44vh;flex:none}.th img{width:48px;height:48px}.info h2{font-size:34px}.info .desc{font-size:20px}}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding:10px;background:#1a1714}
+.th{flex:none;border:2px solid transparent;border-radius:8px;padding:0;background:none;cursor:pointer;color:#ddd;font:inherit;font-size:11px;text-align:center}
+.th img{width:56px;height:56px;object-fit:cover;border-radius:6px;display:block}
+.th.on{border-color:#e8c9a8}
+.th span{display:block;margin-top:2px}
+.info{padding:26px 28px 28px;overflow-y:auto;display:grid;gap:12px;align-content:start}
+@media (max-width:760px){.info{overflow:visible;padding:20px 18px 40px}}
+.info h2{font-family:var(--serif);font-size:40px;line-height:1.05;margin:0;font-weight:600}
+.info .desc{font-size:21px;line-height:1.4;font-family:var(--serif)}
+.facts{display:grid;gap:10px;margin-top:6px}
+.fact{background:var(--accent-soft);border-radius:12px;padding:12px 14px}
+.fact b{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.fact span{font-size:17px}
+.close{position:absolute;top:12px;right:12px;z-index:5;border:0;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.92);color:#111;font-size:24px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.nav{position:absolute;top:calc(50% - 40px);z-index:4;border:0;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.88);color:#111;font-size:22px;cursor:pointer}
+.nav.p{left:12px}.nav.n{right:calc(50% * 0 + 12px)}
+@media (min-width:761px){.nav.n{right:calc(47.6% + 12px)}}
+@media (max-width:760px){.nav{display:none}}
+.cwt{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.cwnote{font-size:13px;color:var(--muted)}
+.specbtn{display:inline-block;padding:10px 18px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;font-size:15px}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="top"><h1>Arte Launch Guide</h1><div class="count" id="count"></div></div>
+  <div class="search" id="sbox">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Search: raffia, silk, ordered, upper…" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+    <button id="clear" aria-label="Clear search">×</button>
+  </div>
+</div></header>
+<main>
+  <div class="rows">
+    <div class="chips" id="launches" role="group" aria-label="Launch"></div>
+    <div class="chips" id="shops" role="group" aria-label="Shop status"></div>
+    <div class="chips" id="pos" role="group" aria-label="Shop position" hidden></div>
+    <div class="chips" id="prices" role="group" aria-label="Price status"></div>
+    <div class="chips" id="colls" role="group" aria-label="Collection"></div>
+  </div><div class="grid" id="grid"></div><div class="empty" id="empty" hidden></div></main>
+
+<dialog id="dlg" aria-label="Design details">
+  <button class="close" id="x" aria-label="Close">×</button>
+  <button class="nav p" id="prev" aria-label="Previous design">‹</button>
+  <button class="nav n" id="next" aria-label="Next design">›</button>
+  <div class="dl">
+    <div class="stage"><div class="main"><img id="big" alt=""></div><div class="thumbs" id="thumbs"></div></div>
+    <div class="info" id="info"></div>
+  </div>
+</dialog>
+
+<script src="data.js"></script>
+<script>
+(function(){
+const D = window.ARTE_DESIGNS || [];
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/color/g,"colour").replace(/grey/g,"gray");
+D.forEach(d=>{ d._h = norm([d.shop.status,d.shop.name,d.shop.pos,d.pstatus==='awaited'?'price awaited':d.pstatus,d.design,d.collection,d.launch,d.description,d.dimensions,d.ref,d.refname,d.colourways.map(c=>c.no+" "+(c.name||"")).join(" ")].join(" | ")); });
+
+const launches = [...new Set(D.map(d=>d.launch))];
+const state = { launch:launches[0]||"", coll:"", shop:"", pos:"", price:"", q:"" };
+try{ const s=JSON.parse(sessionStorage.getItem("arteState")||"{}"); if(s.launch===""||launches.includes(s.launch)) state.launch=s.launch; }catch(e){}
+const save=()=>{try{sessionStorage.setItem("arteState",JSON.stringify({launch:state.launch}))}catch(e){}};
+
+function chips(el, items, cur, cls, onPick){
+  el.innerHTML = items.map(([v,l])=>`<button class="chip ${cls}" aria-pressed="${v===cur}" data-v="${esc(v)}">${esc(l)}</button>`).join("");
+  el.onclick = e=>{ const b=e.target.closest(".chip"); if(b) onPick(b.dataset.v); };
+}
+function inLaunch(d){ return !state.launch || d.launch===state.launch; }
+function terms(){ return norm(state.q).split(/[^a-z0-9]+/).filter(Boolean).map(w=>/\d/.test(w)||w.length<5?w:w.slice(0,-1)); } // light stemming: panorama ~ panoramic
+const SHOPS=[["In shop","b-in"],["Ordered","b-ordered"],["Not in shop","b-not"]];
+const shopCls=s=>(SHOPS.find(x=>x[0]===s)||SHOPS[2])[1];
+function badge(d){ const s=d.shop; const l=s.status==="In shop"?"In shop"+(s.pos?" · "+s.pos:""):s.status; return `<span class="badge ${shopCls(s.status)}">${esc(l)}</span>`; }
+const inr=n=>"\u20b9"+Math.round(n).toLocaleString("en-IN");
+const UNITS={roll:"roll",metre:"metre",panel:"panel",tile:"tile"};
+function sold(p){ return "Sold by the "+UNITS[p.unit]; }
+function sizeTxt(p){ if(!p.size||p.size==="NA") return ""; return p.unit==="metre"?p.size.split(" \u00d7 ")[0]+" wide":p.size+(p.area?` (${p.area} sq ft)`:""); }
+function priceLine(d){
+  const p=d.price;
+  if(!p) return `<div class="pline none">${d.pstatus==="awaited"?"Price awaited":"Discontinued"}</div>`;
+  return p.psf?`<div class="pline">${inr(p.psf)} <small>/ sq ft excl. GST \u00b7 by the ${UNITS[p.unit]}</small></div>`
+              :`<div class="pline">${inr(p.mrp)} <small>per ${UNITS[p.unit]} excl. GST</small></div>`;
+}
+const okPrice=d=>!state.price||d.pstatus===state.price;
+const okShop=d=>(!state.shop||d.shop.status===state.shop)&&(!state.pos||d.shop.pos===state.pos);
+function filtered(){
+  const t=terms();
+  return D.filter(d=>inLaunch(d) && okShop(d) && okPrice(d) && (!state.coll||d.collection===state.coll) && t.every(w=>d._h.includes(w)));
+}
+function hl(text,t){
+  if(!t.length) return esc(text);
+  const n=norm(text); const hit=new Array(text.length).fill(false);
+  // norm() can change length for color/grey; only highlight when lengths line up
+  if(n.length!==text.length) return esc(text);
+  t.forEach(w=>{ let i=n.indexOf(w); while(i>-1){ for(let k=i;k<i+w.length;k++) hit[k]=true; i=n.indexOf(w,i+1);} });
+  let o="",on=false;
+  for(let i=0;i<text.length;i++){ if(hit[i]&&!on){o+="<mark>";on=true} if(!hit[i]&&on){o+="</mark>";on=false} o+=esc(text[i]); }
+  return o+(on?"</mark>":"");
+}
+let shown=[];
+function render(){
+  // collection chips: those in the current launch (counts respect the search)
+  const t=terms();
+  const base=D.filter(d=>inLaunch(d)&&okShop(d)&&okPrice(d)&&t.every(w=>d._h.includes(w)));
+  const pre=D.filter(d=>inLaunch(d)&&okPrice(d)&&(!state.coll||d.collection===state.coll)&&t.every(w=>d._h.includes(w)));
+  const colls=[...new Set(D.filter(d=>inLaunch(d)&&okShop(d)&&okPrice(d)).map(d=>d.collection))];
+  if(state.coll && !colls.includes(state.coll)) state.coll="";
+  chips($("#launches"),[["","All launches"],...launches.map(l=>[l,l])],state.launch,"launch",v=>{state.launch=v;state.coll="";save();render();});
+  chips($("#shops"),[["","Any shop status"],...SHOPS.map(([s])=>[s,`${s} (${pre.filter(d=>d.shop.status===s&&(s!=="In shop"||!state.pos||d.shop.pos===state.pos)).length})`])],state.shop,"shop",v=>{state.shop=v;if(v!=="In shop")state.pos="";render();});
+  const nop=D.filter(d=>inLaunch(d)&&okShop(d)&&(!state.coll||d.collection===state.coll)&&t.every(w=>d._h.includes(w)));
+  const PR=[["listed","Priced"],["awaited","Price awaited"],["discontinued","Discontinued"]];
+  chips($("#prices"),[["","Any price status"],...PR.map(([v,l])=>[v,`${l} (${nop.filter(d=>d.pstatus===v).length})`])],state.price,"shop",v=>{state.price=v;render();});
+  const pe=$("#pos"); pe.hidden=state.shop!=="In shop";
+  if(!pe.hidden) chips(pe,[["","Upper & Lower"],["Upper",`Upper (${pre.filter(d=>d.shop.status==="In shop"&&d.shop.pos==="Upper").length})`],["Lower",`Lower (${pre.filter(d=>d.shop.status==="In shop"&&d.shop.pos==="Lower").length})`]],state.pos,"shop",v=>{state.pos=v;render();});
+  chips($("#colls"),[["","All collections"],...colls.map(c=>[c,`${c} (${base.filter(d=>d.collection===c).length})`])],state.coll,"",v=>{state.coll=v;render();});
+  shown=filtered();
+  $("#count").textContent = shown.length+(shown.length===1?" design":" designs");
+  $("#grid").innerHTML = shown.map((d,i)=>`
+    <button class="card" data-i="${i}" aria-label="${esc(d.design)}, ${esc(d.collection)}">
+      <div class="ph">${d.room?`<img loading="lazy" src="${d.room}" alt="${esc(d.design)} wallcovering${d.src==="pdf"||(d.colourways[0]&&d.colourways[0].img)?" in a room":""}">`:`<div class="noimg">No image</div>`}${badge(d)}</div>
+      <div class="tx">
+        <div class="coll">${hl(d.collection,t)}${state.launch?"":" · "+esc(d.launch)}</div>
+        <h2 class="name">${hl(d.design,t)}</h2>
+        ${d.description?`<p class="desc">${hl(d.description,t)}</p>`:""}
+        ${priceLine(d)}
+        ${d.dimensions?`<div class="dim">${hl(d.dimensions,t)}</div>`:""}
+      </div>
+    </button>`).join("");
+  const em=$("#empty"); em.hidden = shown.length>0;
+  em.innerHTML = shown.length?"":`No designs match “${esc(state.q)}”.<br><small>Try a shorter word, or change launch, shop status or collection above.</small>`;
+}
+$("#grid").onclick=e=>{ const c=e.target.closest(".card"); if(c) openD(+c.dataset.i); };
+
+const q=$("#q"), sbox=$("#sbox");
+q.addEventListener("input",()=>{state.q=q.value; sbox.classList.toggle("has",!!q.value); render();});
+$("#clear").onclick=()=>{q.value="";state.q="";sbox.classList.remove("has");render();q.focus();};
+
+// ---- detail ----
+const dlg=$("#dlg"); let cur=0;
+function priceFact(d){
+  const p=d.price;
+  if(!p) return `<div class="fact price"><b>Price</b><span>${d.pstatus==="awaited"?"Price awaited \u2013 launched after the 14 Feb 2026 price list":"Discontinued \u2013 not in the 14 Feb 2026 price list"}</span></div>`;
+  const rows=[`<span>${sold(p)}${sizeTxt(p)?" \u00b7 "+esc(sizeTxt(p)):""}</span>`];
+  if(p.unit==="panel"||p.unit==="tile"||p.unit==="roll") rows.push(`<span><b style="display:inline">${p.unit==="panel"?"Full panel":p.unit==="tile"?"Per tile":"Per roll"}</b> ${inr(p.mrp)} excl. GST</span>`);
+  else rows.push(`<span><b style="display:inline">Per metre</b> ${inr(p.mrp)} excl. GST</span>`);
+  if(p.psf) rows.unshift(`<span class="big">${inr(p.psf)} <small style="font-size:14px;font-family:var(--sans);font-weight:400">per sq ft excl. GST</small></span>`);
+  else rows.push(`<span class="cwnote">Size not listed, so no per sq ft rate</span>`);
+  return `<div class="fact price"><b>MRP</b>${rows.join("")}<span class="cwnote">Price list dated 14 Feb 2026</span></div>`;
+}
+function openD(i){
+  cur=i; const d=shown[i]; if(!d) return;
+  const imgs=d.room?[{src:d.room,label:d.src==="pdf"||(d.colourways[0]&&d.colourways[0].img)?"Room":"Pack"}]:[];
+  if(d.pattern) imgs.push({src:d.pattern,label:/^Panoramic/.test(d.dimensions)?"Panels":"Pattern"});
+  d.colourways.forEach(c=>c.img&&imgs.push({src:c.img,label:c.no}));
+  $("#big").src=imgs.length?imgs[0].src:"data:,"; $("#big").alt=d.design;
+  $("#thumbs").innerHTML=imgs.map((m,k)=>`<button class="th ${k?"":"on"}" data-s="${m.src}"><img src="${m.src}" alt=""><span>${esc(m.label)}</span></button>`).join("");
+  $("#info").innerHTML=`
+    <div class="coll">${esc(d.collection)} · ${esc(d.launch)}</div>
+    <h2>${esc(d.design)}</h2>
+    <div>${badge(d)}${d.shop.name&&d.shop.name!==d.collection?` <span class="cwnote">listed in shop as “${esc(d.shop.name)}”</span>`:""}</div>
+    ${d.description?`<p class="desc">${esc(d.description)}${/[.!?]$/.test(d.description)?"":"."}</p>`:""}
+    <div class="facts">
+      ${priceFact(d)}
+      ${d.dimensions?`<div class="fact"><b>Dimensions</b><span>${esc(d.dimensions)}</span></div>`:""}
+      ${d.composition?`<div class="fact"><b>Composition</b><span>${esc(d.composition)}</span></div>`:""}
+      ${d.fire?`<div class="fact"><b>Fire rating (EU)</b><span>${esc(d.fire)}</span></div>`:""}
+    </div>
+    ${d.spec?`<div><a class="specbtn" href="${esc(d.spec)}" target="_blank" rel="noopener">Spec sheet (PDF)</a></div>`:""}
+    ${d.colourways.length?`<div class="cwt">${d.colourways.length} colourway${d.colourways.length===1?"":"s"}</div>`:""}
+    ${d.colourways.some(c=>c.img)?`<div class="cwnote">Tap a thumbnail to enlarge it; numbers are article numbers.</div>`
+      :`<div class="cws">${d.colourways.map(c=>`<span>${esc(c.name)} · ${esc(c.no)}</span>`).join("")}</div>${d.url?`<div class="cwnote"><a href="${esc(d.url)}" target="_blank" rel="noopener">View on arte-international.com</a></div>`:""}`}`;
+  if(!dlg.open) dlg.showModal();
+  dlg.querySelector(".info").scrollTop=0;
+}
+$("#thumbs").onclick=e=>{const b=e.target.closest(".th"); if(!b) return; $("#big").src=b.dataset.s; document.querySelectorAll(".th").forEach(x=>x.classList.toggle("on",x===b));};
+const step=n=>{ if(shown.length) openD((cur+n+shown.length)%shown.length); };
+$("#prev").onclick=()=>step(-1); $("#next").onclick=()=>step(1); $("#x").onclick=()=>dlg.close();
+dlg.addEventListener("click",e=>{ if(e.target===dlg) dlg.close(); });
+document.addEventListener("keydown",e=>{ if(!dlg.open) return; if(e.key==="ArrowLeft") step(-1); if(e.key==="ArrowRight") step(1); });
+
+render();
+})();
+</script>
+</body>
+</html>
